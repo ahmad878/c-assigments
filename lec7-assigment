@@ -1,0 +1,32 @@
+#include <stdio.h>
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned long u32;
+
+const u8 MAX_SPEED = 255;
+void PrintSensorValue(const u16 *ptr)
+{
+    //*ptr=0;
+    //printf("%d",*ptr);error because pointer is declared to constant
+    printf("Reading Sensor... Temperature is: %d\n", *ptr);
+}
+int main()
+{
+    printf("System Booting...\n");
+    printf("Max speed configuration:%d\n",MAX_SPEED);
+    u16 p=16;
+    u16 Temperature=75;
+//MAX_SPEED=200;
+//printf("%d",MAX_SPEED); error because it is constant so its stored in memory as read only
+PrintSensorValue(&Temperature);
+u8 PORTA_DATA=0;
+u8 *const hardware_ptr=&PORTA_DATA;
+*hardware_ptr=100;
+*hardware_ptr = 255;
+printf("Hardware Port Data is now:%d\n",*hardware_ptr);
+//hardware_ptr=& MAX_SPEED;it wil not work because we declared constant pointer points to data
+const u32 DEVICE_ID = 987654321;
+const u32 * const id_ptr = &DEVICE_ID;
+printf("Device ID verified:%d\n",*id_ptr);
+    return 0;
+}
